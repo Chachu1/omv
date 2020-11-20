@@ -25,17 +25,17 @@ services:
       - REDIS_HOST=nextcloud-redis
       - NEXTCLOUD_ADMIN_USER=xxxxxxxxx
       - NEXTCLOUD_ADMIN_PASSWORD=xxxxxxxxxx
-      - NEXTCLOUD_TRUSTED_DOMAINS= cloud.example.com 192.168.10.0/24
+      - NEXTCLOUD_TRUSTED_DOMAINS= cloud.youdomain.com 192.168.10.0/24 #These are the networks you will be able to access nextcloud from, edit them according to your setup
       - TRUSTED_PROXIES=192.168.10.20
     volumes:
       - /srv/dev-disk-by-label-media/Files/AppData/nextcloud/config:/var/www/html/config
       - /srv/dev-disk-by-label-media/Files/AppData/nextcloud/app/custom_apps:/var/www/html/custom_apps
-      - /srv/dev-disk-by-label-tank/nextcloud/data:/var/www/html/data
+      - /srv/dev-disk-by-label-tank/nextcloud/data:/var/www/html/data #This is where all the file that you upload are saved, you can edit to any location you like.
       - /srv/dev-disk-by-label-media/Files/AppData/nextcloud/app/themes:/var/www/html/themes
       - /etc/localtime:/etc/localtime:ro
     restart: unless-stopped
     ports:
-      - "8443:443"
+      - "8443:443" #8443 must be available, you can replace it with anything you like as long as it is not being used elsewhere
 
   nextcloud-redis:
     image: redis
